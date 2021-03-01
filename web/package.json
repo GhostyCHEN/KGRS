@@ -8,8 +8,13 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "10.0.7",
+    "next": "10.0.4",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "antd": "^4.13.0",
+    "babel-plugin-import": "^1.13.3"
   }
 }
