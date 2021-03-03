@@ -16,6 +16,11 @@
     "@ant-design/compatible": "^1.0.8",
     "@zeit/next-css": "^1.0.1",
     "antd": "^4.13.0",
-    "babel-plugin-import": "^1.13.3"
+    "babel-plugin-import": "^1.13.3",
+    "d3": "^3.5.17",
+    "jquery": "^3.6.0",
+    "materialize-css": "^1.0.0-rc.2",
+    "npm": "^7.6.0",
+    "react-d3": "^0.4.0"
   }
 }
