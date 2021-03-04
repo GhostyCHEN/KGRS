@@ -11,7 +11,7 @@ const Header = () => {
     <div className="header">
       <Row type="flex" justify="center">
         <Col xs={24} sm={24} md={10} lg={15} xl={12}>
-          <span className="header-logo">华师计算机学院智能推荐</span>
+          <span className="header-logo">计算机学科教学资源管理</span>
         </Col>
 
         <Col className="memu-div" xs={0} sm={0} md={14} lg={8} xl={6}>
@@ -20,7 +20,7 @@ const Header = () => {
               <HomeOutlined />
               首页
             </Menu.Item>
-            <Menu.Item key="kjview">
+            <Menu.Item key="kgview">
               <ApartmentOutlined />
               计科教学可视化图谱
             </Menu.Item>

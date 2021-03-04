@@ -1,0 +1,22 @@
+.content {
+  margin-top: 10px;
+  min-height: 800px;
+}
+.container {
+  margin-top: 10px;
+  
+}
+
+.container > .ant-menu-vertical{
+  border: 1px solid #f0f0f0;
+}
+.container-right{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container-right > .container-card {
+  margin: 0 20px  20px 0;
+  width: 200px;
+  height: 300px;
+}

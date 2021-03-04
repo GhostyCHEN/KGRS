@@ -4,6 +4,7 @@ import Head from "next/head";
 import * as d3 from "d3";
 import  $ from 'jquery'
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import  initKG from '../static/func/kj'
 import "materialize-css/dist/css/materialize.css";
 import "../static/style/pages/kjview.css";
@@ -94,6 +95,7 @@ const KgView = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
