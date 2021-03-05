@@ -76,13 +76,13 @@ const KgView = () => {
       <div className="row" style={{marginTop:'10px',display:'flex'}}>
         <ul className="collapsible" style={{ marginLeft:"4rem",width:"20rem"}}>
           <li className="active">
-            <div class="collapsible-header">数据结构</div>
+            <div className="collapsible-header">数据结构</div>
           </li>
           <li className="active">
-            <div class="collapsible-header">计算机网络</div>
+            <div className="collapsible-header">计算机网络</div>
           </li>
           <li className="active">
-            <div class="collapsible-header">计算机组成原理</div>
+            <div className="collapsible-header">计算机组成原理</div>
           </li>
         </ul>
         <div className="col s12">
