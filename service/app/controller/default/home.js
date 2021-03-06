@@ -3,12 +3,12 @@
 const Controller = require("egg").Controller;
 
 class HomeController extends Controller {
-  async index() {
-    // this.ctx.body = "api接口";
-    let result = await this.app.mysql.get("article", {});
+  // async index() {
+  //   // this.ctx.body = "api接口";
+  //   let result = await this.app.mysql.get("article", {});
 
-    this.ctx.body = result;
-  }
+  //   this.ctx.body = result;
+  // }
 
   async getArticleList() {
     let sql =

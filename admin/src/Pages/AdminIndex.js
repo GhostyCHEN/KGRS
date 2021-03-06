@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
 import { Icon } from "@ant-design/compatible";
 import { Route } from "react-router-dom";
+import AddArticle from "./AddArticle";
 import "antd/dist/antd.css";
+import "../static/css/AdminIndex.css";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -17,15 +19,15 @@ function AdminIndex() {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-        <div className="logo" />
+        <div className="logo">计算机资源管理后台</div>
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1">
-            <Icon type="pie-chart" />
-            <span>工作台</span>
-          </Menu.Item>
-          <Menu.Item key="2">
             <Icon type="desktop" />
             <span>添加文章</span>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <Icon type="file" />
+            <span>文章列表</span>
           </Menu.Item>
           <SubMenu
             key="sub1"
@@ -46,13 +48,13 @@ function AdminIndex() {
           </Menu.Item>
         </Menu>
       </Sider>
-      {/* <Layout>
-        <Header style={{ background: "#fff", padding: 0 }} />
-        <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
+      <Layout>
+        {/* <Header style={{ background: "#fff", padding: 0 }} /> */}
+        <Content style={{ margin: "16px" }}>
+          {/* <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>后台管理</Breadcrumb.Item>
             <Breadcrumb.Item>工作台</Breadcrumb.Item>
-          </Breadcrumb>
+          </Breadcrumb> */}
           <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
             <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
               <div>
@@ -62,7 +64,7 @@ function AdminIndex() {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>JSPang.com</Footer>
-      </Layout> */}
+      </Layout>
     </Layout>
   );
 }

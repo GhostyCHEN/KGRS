@@ -47,11 +47,11 @@ module.exports = (appInfo) => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: ["*"],
+    domainWhiteList: ["http://127.0.0.1:3001", "http://127.0.0.1:3000"],
   };
 
   config.cors = {
-    origin: "http://127.0.0.1:3000",
+    // origin: "http://127.0.0.1:3001",
     // origin: "http://localhost:3000",
     credentials: true, //允许Cook跨域
     allowMethods: "GET,HEAD.PUT,POST,DELETE,PATCH,OPTIONS",
