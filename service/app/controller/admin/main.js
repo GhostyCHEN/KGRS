@@ -58,6 +58,48 @@ class MainController extends Controller {
       isScuccess: updateSuccess,
     };
   }
+
+  // 获取资源列表
+  async getArticleList() {
+    let sql =
+      "SELECT article.id as id, " +
+      "article.title as title, " +
+      "article.type as type, " +
+      "article.introduce as introduce, " +
+      "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s' ) as addTime " +
+      "from article";
+    const list = await this.app.mysql.query(sql);
+
+    this.ctx.body = {
+      data: list,
+    };
+  }
+
+  //删除资源
+  async delArticle() {
+    let id = this.ctx.params.id;
+    const res = await this.app.mysql.delete("article", { id: id });
+    this.ctx.body = { data: res };
+  }
+
+  //修改资源
+  async getArticleById() {
+    let id = this.ctx.params.id;
+
+    let sql =
+      "SELECT article.id as id, " +
+      "article.title as title, " +
+      "article.type as type, " +
+      "article.content as content, " +
+      "article.introduce as introduce, " +
+      "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s' ) as addTime, " +
+      "article.addTime as defaultTime " +
+      "from article " +
+      "WHERE article.id=" +
+      id;
+    const result = await this.app.mysql.query(sql);
+    this.ctx.body = { data: result };
+  }
 }
 
 module.exports = MainController;

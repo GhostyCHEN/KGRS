@@ -3,13 +3,6 @@
 const Controller = require("egg").Controller;
 
 class HomeController extends Controller {
-  // async index() {
-  //   // this.ctx.body = "api接口";
-  //   let result = await this.app.mysql.get("article", {});
-
-  //   this.ctx.body = result;
-  // }
-
   async getArticleList() {
     let sql =
       "SELECT article.id as id, " +

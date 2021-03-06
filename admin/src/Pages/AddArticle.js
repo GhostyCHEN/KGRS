@@ -12,6 +12,7 @@ import {
   Affix,
 } from "antd";
 import axios from "axios";
+import moment from "moment";
 import servicePath from "../config/apiUrl";
 
 const { Option } = Select;
@@ -23,7 +24,6 @@ function AddArticle(props) {
   const [articleContent, setArticleContent] = useState(""); //markdown的编辑内容
   const [markdownContent, setMarkdownContent] = useState("预览内容"); //html内容
   const [introducemd, setIntroducemd] = useState(); //简介的markdown内容
-  const [introducehtml, setIntroducehtml] = useState("等待编辑"); //简介的html内容
   const [showDate, setShowDate] = useState(); //发布日期
   const [updateDate, setUpdateDate] = useState(); //修改日志的日期
   const [typeInfo, setTypeInfo] = useState([1]); // 文章类别信息
@@ -31,12 +31,12 @@ function AddArticle(props) {
 
   useEffect(() => {
     getArticleType();
-    //获得文章ID
-    // let tmpId = props.match.params.id;
-    // if (tmpId) {
-    //   setArticleId(tmpId);
-    //   getArticleById(tmpId);
-    // }
+    // 获得文章ID
+    let tmpId = props.match.params.id;
+    if (tmpId) {
+      setArticleId(tmpId);
+      getArticleById(tmpId);
+    }
   }, []);
 
   marked.setOptions({
@@ -54,12 +54,6 @@ function AddArticle(props) {
     setArticleContent(e.target.value);
     let html = marked(e.target.value);
     setMarkdownContent(html);
-  };
-
-  const changeIntroduce = (e) => {
-    setIntroducemd(e.target.value);
-    let html = marked(e.target.value);
-    setIntroducehtml(html);
   };
 
   const getArticleType = () => {
@@ -105,8 +99,8 @@ function AddArticle(props) {
     dataProps.title = articleTitle;
     dataProps.content = articleContent;
     dataProps.introduce = introducemd;
-    let datetext = showDate.replace("-", "/"); //把字符串转换成时间戳
-    dataProps.addTime = new Date(datetext).getTime() / 1000;
+    // let datetext = showDate.replace("-", "/"); //把字符串转换成时间戳
+    dataProps.addTime = new Date(showDate).getTime() / 1000;
 
     if (articleId == 0) {
       axios({
@@ -140,6 +134,23 @@ function AddArticle(props) {
     }
   };
 
+  const getArticleById = (id) => {
+    axios(servicePath.getArticleById + id, {
+      withCredentials: true,
+      header: { "Access-Control-Allow-Origin": "*" },
+    }).then((res) => {
+      console.log(res);
+      setArticleTitle(res.data.data[0].title);
+      setArticleContent(res.data.data[0].content);
+      let html = marked(res.data.data[0].content);
+      setMarkdownContent(html);
+      setIntroducemd(res.data.data[0].introduce);
+      setShowDate(moment(res.data.data[0].addTime));
+      // setShowDate(res.data.data[0].defaultTime);
+      setSelectType(res.data.data[0].type);
+    });
+  };
+
   const unique = (arr) => {
     let unique = {};
     arr.forEach(function (item) {
@@ -159,6 +170,7 @@ function AddArticle(props) {
           <Row gutter={10}>
             <Col span={20}>
               <Input
+                value={articleTitle}
                 placeholder="资源标题"
                 size="large"
                 onChange={(e) => {
@@ -218,15 +230,16 @@ function AddArticle(props) {
                 <TextArea
                   rows={4}
                   value={introducemd}
-                  onChange={changeIntroduce}
-                  onPressEnter={changeIntroduce}
+                  // onChange={changeIntroduce}
+                  // onPressEnter={changeIntroduce}
                   placeholder="资源内容简介"
                 />
               </Col>
               <Col span={12}>
                 <div className="date-select">
                   <DatePicker
-                    onChange={(date, dateString) => setShowDate(dateString)}
+                    value={showDate}
+                    onChange={(date, dateString) => setShowDate(date)}
                     placeholder="发布日期"
                     size="large"
                   />
