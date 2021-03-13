@@ -24,20 +24,6 @@ const Home = (list) => {
           </Menu>
         </Col>
         <Col className="container-right" span={17} offset={1}>
-          {/* <Card className="container-card" title="Card title">
-            <p>Information</p>
-          </Card>
-          <Card className="container-card" title="Card title">
-            <p>Information</p>
-          </Card>
-          <Card className="container-card" title="Card title">
-            <p>Information</p>
-          </Card>
-          <Card className="container-card" title="Card title">
-            <p>Information</p>
-          </Card><Card className="container-card" title="Card title">
-            <p>Information</p>
-          </Card> */}
           <List
             grid={{ gutter: 10, column: 3 }}
             dataSource={mylist}

@@ -1,8 +1,6 @@
 import d3 from "d3";
 const initKG = (data, config, container) => {
-  //data:nodes 至少需要一个name
   var nodeDict = data.nodes;
-
   var links = data.links;
 
   var nodes = {};
@@ -108,7 +106,6 @@ const initKG = (data, config, container) => {
     .on("tick", tick)
     //开始转换
     .start();
-
   //缩放配置
   var zoom = d3.behavior
     .zoom()
@@ -149,7 +146,7 @@ const initKG = (data, config, container) => {
       .attr("orient", "auto") //绘制方向，可设定为：auto（自动确认方向）和 角度值
       .attr("stroke-width", 3) //箭头宽度
       .append("path")
-      .attr("d", "M0,-5L10,0L0,5") //绘制箭头，路径为一个三角形，有疑问参考svg的path http://www.runoob.com/svg/svg-path.html
+      .attr("d", "M0,-5L10,0L0,5") //绘制箭头，路径为一个三角形l
       .attr("fill", "#000000"); //箭头颜色
 
   //设置连接线
@@ -158,7 +155,6 @@ const initKG = (data, config, container) => {
     .selectAll(".edgepath")
     .data(force.links()) //连线数据
     .enter() //当数组中的个数大于元素个数时，由d3创建空元素并与数组中超出的部分进行绑定。
-    //可以参考http://www.ourd3js.com/wordpress/797/ enter、exit、update的区别
     .append("path") //添加path标签
     .attr({
       d: function (d) {
@@ -216,7 +212,6 @@ const initKG = (data, config, container) => {
     //拖拽函数
     return force.drag().on("dragstart", function (d) {
       d3.event.sourceEvent.stopPropagation(); //取消默认事件
-      //d.fixed = true;    //拖拽开始后设定被拖拽对象为固定
     });
     //.on("drag", dragmove);
   }
@@ -281,10 +276,7 @@ const initKG = (data, config, container) => {
     })
     .on("dblclick", function (d) {
       //双击节点时节点恢复拖拽
-      d.fixed = false;
-    })
-    .on("mouseover", function (d) {
-      //config：替换成需要回显的html
+      // d.fixed = false;
       var content;
       if (config.contentHook) {
         content = config.contentHook(d);
@@ -297,6 +289,20 @@ const initKG = (data, config, container) => {
         .style("top", d3.event.pageY + 20 + "px")
         .style("opacity", 1.0);
     })
+    .on("mouseover", function (d) {
+      //config：替换成需要回显的html
+      // var content;
+      // if (config.contentHook) {
+      //   content = config.contentHook(d);
+      // } else {
+      //   content = config.content;
+      // }
+      // tooltip
+      //   .html(content)
+      //   .style("left", d3.event.pageX + "px")
+      //   .style("top", d3.event.pageY + 20 + "px")
+      //   .style("opacity", 1.0);
+    })
     .on("mousemove", function (d) {
       tooltip
         .style("left", d3.event.pageX + "px")
@@ -308,16 +314,19 @@ const initKG = (data, config, container) => {
     .call(drag()); //使顶点可以被拖动
 
   svg.selectAll("g").call(drag()); //为svg下的所有g标签添加拖拽事件
-  //svg.selectAll("circle").call(drag());
-  //svg.selectAll("path").call(drag());
-  svg.on("dblclick.zoom", function () {}); //取消svg和圆圈的双击放大事件（d3中默认开启7个事件，关闭防止与上面的双击事件冲突）
+  svg.on("dblclick.zoom", function () {
+    // window.open(
+    //   "http://127.0.0.1:3000/detailed?id=1",
+    //   "_blank",
+    //   "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes"
+    // );
+  }); //取消svg和圆圈的双击放大事件
   circle.on("dblclick.zoom", null);
 
   var text = svg
     .append("g")
     .selectAll("text")
     .data(force.nodes())
-    //返回缺失元素的占位对象（placeholder），指向绑定的数据中比选定元素集多出的一部分元素。
     .enter()
     .append("text") //添加text标签
     .attr("dy", ".35em") //将文字下移
@@ -421,7 +430,7 @@ const initKG = (data, config, container) => {
         //连线上的文字
         if (d.target.x < d.source.x) {
           //判断起点和终点的位置，来让文字一直显示在线的上方且一直是正对用户
-          let bbox = this.getBBox(); //获取矩形空间,并且调整翻转中心。（因为svg与css中的翻转不同，具体区别可看http://www.zhangxinxu.com/wordpress/2015/10/understand-svg-transform/）
+          let bbox = this.getBBox(); //获取矩形空间,并且调整翻转中心。
           let rx = bbox.x + bbox.width / 2;
           let ry = bbox.y + bbox.height / 2;
           return "rotate(180 " + rx + " " + ry + ")";

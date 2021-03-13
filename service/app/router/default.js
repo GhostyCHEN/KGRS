@@ -6,4 +6,6 @@ module.exports = (app) => {
     "/default/getArticleById/:id",
     controller.default.home.getArticleById
   );
+  router.get("/default/getNodeList", controller.default.home.getNodeList);
+  router.get("/default/getLinkList", controller.default.home.getLinkList);
 };

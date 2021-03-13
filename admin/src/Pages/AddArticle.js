@@ -57,6 +57,10 @@ function AddArticle(props) {
     setMarkdownContent(html);
   };
 
+  const changeIntroduce = (e) => {
+    setIntroducemd(e.target.value);
+  };
+
   const getArticleType = () => {
     axios({
       method: "get",
@@ -73,18 +77,6 @@ function AddArticle(props) {
       }
     });
   };
-
-  //测试
-  // const getDate = () => {
-  //   axios({
-  //     method: "get",
-  //     url: "http://api.qingyunke.com/api.php?key=free&appid=0&msg=" + "hi",
-  //     header: { "Access-Control-Allow-Origin": "*" },
-  //     withCredentials: true,
-  //   }).then((res) => {
-  //     console.log(res);
-  //   });
-  // };
 
   const selectTypeHandler = (value) => {
     setSelectType(value);
@@ -231,7 +223,8 @@ function AddArticle(props) {
           <Affix offsetTop={20}>
             <Row>
               <Col span={24}>
-                <Button size="large">暂存内容</Button>&nbsp;
+                {/* <Button size="large">暂存内容</Button> */}
+                &nbsp;
                 <Button type="primary" size="large" onClick={saveArticle}>
                   发布资源
                 </Button>
@@ -242,8 +235,8 @@ function AddArticle(props) {
                 <TextArea
                   rows={4}
                   value={introducemd}
-                  // onChange={changeIntroduce}
-                  // onPressEnter={changeIntroduce}
+                  onChange={changeIntroduce}
+                  onPressEnter={changeIntroduce}
                   placeholder="资源内容简介"
                 />
               </Col>

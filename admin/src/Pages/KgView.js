@@ -8,59 +8,33 @@ import "../static/css/KgView.css";
 function KgView() {
   const [nodeList, setNodeList] = useState({});
   const [linkList, setLinkList] = useState([]);
-  const getData = () => {
-    axios({
-      method: "get",
-      url: servicePath.getNodeList,
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": "*" },
-    }).then((res) => {
-      if (res.data.data) {
-        var result = {};
-        for (const item of res.data.data) {
-          result[item.id] = {
-            name: item.name,
-            type: item.type,
-          };
-        }
-        setNodeList(result);
-      }
-    });
-    axios({
-      method: "get",
-      url: servicePath.getLinkList,
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": "*" },
-    }).then((res) => {
-      setLinkList(res.data.data);
-    });
-  };
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-  // const t1 =
-  //   "{" +
-  //   '"1": {"name": "计算机组成原理","type": "学科"},\n' +
-  //   '"2": { "name": "计算机系统概论", "type": "章节"},\n' +
-  //   '"3": {"name": "计算机的发展与应用","type": "章节"},\n' +
-  //   '"4": {"name": "运算方法和运算部件","type": "章节"},\n' +
-  //   '"5": {"name": "指令系统","type": "章节"},\n' +
-  //   '"6": {"name": "主存储器","type":"章节"},\n' +
-  //   '"7": {"name": "中央处理器","type": "章节"},\n' +
-  //   '"8": {"name": "辅助存储器","type": "章节"},\n' +
-  //   '"9": {"name": "I/O系统","type": "章节"}\n' +
-  //   "}";
-  // const t2 =
-  //   "[\n" +
-  //   '{ "source": 1, "target": 2, "rela": "章节"},\n' +
-  //   '{ "source": 1, "target": 3, "rela": "章节"},\n' +
-  //   '{ "source": 1, "target": 4, "rela": "章节" },\n' +
-  //   '{ "source": 1, "target": 5, "rela": "章节" },\n' +
-  //   '{ "source": 1, "target": 6, "rela": "章节" },\n' +
-  //   '{ "source": 1, "target": 7, "rela": "章节" },\n' +
-  //   '{ "source": 1, "target": 8, "rela": "章节" },\n' +
-  //   '{ "source": 1, "target": 9, "rela": "章节" }\n' +
-  //   "]";
+  // const getData = () => {
+  //   axios({
+  //     method: "get",
+  //     url: servicePath.getNodeList,
+  //     withCredentials: true,
+  //     headers: { "Access-Control-Allow-Origin": "*" },
+  //   }).then((res) => {
+  //     if (res.data.data) {
+  //       var result = {};
+  //       for (const item of res.data.data) {
+  //         result[item.id] = {
+  //           name: item.name,
+  //           type: item.type,
+  //         };
+  //       }
+  //       setNodeList(result);
+  //     }
+  //   });
+  //   axios({
+  //     method: "get",
+  //     url: servicePath.getLinkList,
+  //     withCredentials: true,
+  //     headers: { "Access-Control-Allow-Origin": "*" },
+  //   }).then((res) => {
+  //     setLinkList(res.data.data);
+  //   });
+  // };
 
   const render = async () => {
     var contentHook = function (item) {};
@@ -89,10 +63,8 @@ function KgView() {
       withCredentials: true,
       headers: { "Access-Control-Allow-Origin": "*" },
     }).then((res) => {
-      console.log(res.data);
       linkList = res.data.data;
     });
-    // console.log(nodeList, linkList);
     var data = {};
     data.nodes = nodeList;
     data.links = linkList;

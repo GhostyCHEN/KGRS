@@ -32,6 +32,34 @@ class HomeController extends Controller {
     const result = await this.app.mysql.query(sql);
     this.ctx.body = { data: result };
   }
+
+  //获取节点列表
+  async getNodeList() {
+    let sql =
+      "select node.id as id, " +
+      "node.name as name, " +
+      "node.url as url, " +
+      "node.type as type " +
+      "from node";
+    const nodeList = await this.app.mysql.query(sql);
+    this.ctx.body = {
+      data: nodeList,
+    };
+  }
+
+  // 获取关系列表
+  async getLinkList() {
+    let sql =
+      "select link.source as source, " +
+      "link.id as id, " +
+      "link.target as target,  " +
+      "link.rela as rela " +
+      "from link";
+    const linkList = await this.app.mysql.query(sql);
+    this.ctx.body = {
+      data: linkList,
+    };
+  }
 }
 
 module.exports = HomeController;

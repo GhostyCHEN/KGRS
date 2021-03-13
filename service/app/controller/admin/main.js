@@ -53,7 +53,6 @@ class MainController extends Controller {
 
     const result = await this.app.mysql.update("article", tmpArticle);
     const updateSuccess = result.affectedRows === 1;
-    console.log(updateSuccess);
     this.ctx.body = {
       isScuccess: updateSuccess,
     };
@@ -127,7 +126,6 @@ class MainController extends Controller {
   //修改节点
   async updateNodeList() {
     let tmpNode = this.ctx.request.body;
-    console.log(tmpNode);
     await this.app.mysql.update("node", tmpNode);
     this.ctx.body = { data: "修改成功" };
   }
