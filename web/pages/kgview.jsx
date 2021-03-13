@@ -43,14 +43,16 @@ const KgView = () => {
   
   const render = () => {
     
-      
+    var contentHook = function (item) {
+        console.log(item);
+      }
       var data = {}
       data.nodes = JSON.parse(t1);
       data.links = JSON.parse(t2);
       var config = {
           //鼠标mouseover后的弹窗
           content:null,
-          contentHook: null,
+          contentHook: contentHook,
           //节点配色方案（可为空)
           nodeColor: null,
           //连接线配色方案（可为空）

@@ -29,4 +29,46 @@ module.exports = (app) => {
     adminauth,
     controller.admin.main.getArticleById
   );
+  // 节点列表
+  router.get(
+    "/admin/getNodeList",
+    adminauth,
+    controller.admin.main.getNodeList
+  );
+  router.get(
+    "/admin/delNodeList/:id",
+    adminauth,
+    controller.admin.main.delNodeList
+  );
+  router.post(
+    "/admin/addNodeList",
+    adminauth,
+    controller.admin.main.addNodeList
+  );
+  router.post(
+    "/admin/updateNodeList",
+    adminauth,
+    controller.admin.main.updateNodeList
+  );
+  // 节点关系列表
+  router.get(
+    "/admin/getLinkList",
+    adminauth,
+    controller.admin.main.getLinkList
+  );
+  router.get(
+    "/admin/delLinkList/:id",
+    adminauth,
+    controller.admin.main.delLinkList
+  );
+  router.post(
+    "/admin/addLinkList",
+    adminauth,
+    controller.admin.main.addLinkList
+  );
+  router.post(
+    "/admin/updateLinkList",
+    adminauth,
+    controller.admin.main.updateLinkList
+  );
 };

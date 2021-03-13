@@ -31,6 +31,7 @@ function AddArticle(props) {
 
   useEffect(() => {
     getArticleType();
+    // getDate();
     // 获得文章ID
     let tmpId = props.match.params.id;
     if (tmpId) {
@@ -72,6 +73,18 @@ function AddArticle(props) {
       }
     });
   };
+
+  //测试
+  // const getDate = () => {
+  //   axios({
+  //     method: "get",
+  //     url: "http://api.qingyunke.com/api.php?key=free&appid=0&msg=" + "hi",
+  //     header: { "Access-Control-Allow-Origin": "*" },
+  //     withCredentials: true,
+  //   }).then((res) => {
+  //     console.log(res);
+  //   });
+  // };
 
   const selectTypeHandler = (value) => {
     setSelectType(value);
@@ -139,7 +152,6 @@ function AddArticle(props) {
       withCredentials: true,
       header: { "Access-Control-Allow-Origin": "*" },
     }).then((res) => {
-      console.log(res);
       setArticleTitle(res.data.data[0].title);
       setArticleContent(res.data.data[0].content);
       let html = marked(res.data.data[0].content);

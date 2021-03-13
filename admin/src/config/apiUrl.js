@@ -8,6 +8,14 @@ let servicePath = {
   getArticleList: ipUrl + "getArticleList", //  资源列表
   delArticle: ipUrl + "delArticle/", //  删除文章
   getArticleById: ipUrl + "getArticleById/", //  根据ID获得文章详情
+  getNodeList: ipUrl + "getNodeList", //获取节点列表
+  delNodeList: ipUrl + "delNodeList/", //删除节点列表
+  addNodeList: ipUrl + "addNodeList", //增加节点列表
+  updateNodeList: ipUrl + "updateNodeList", // 更新节点
+  getLinkList: ipUrl + "getLinkList", //获取关系列表
+  delLinkList: ipUrl + "delLinkList/", //删除关系列表
+  addLinkList: ipUrl + "addLinkList", //增加关系列表
+  updateLinkList: ipUrl + "updateLinkList", //更新节点关系
 };
 
 export default servicePath;

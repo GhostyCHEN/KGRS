@@ -74,7 +74,6 @@ class MainController extends Controller {
       data: list,
     };
   }
-
   //删除资源
   async delArticle() {
     let id = this.ctx.params.id;
@@ -99,6 +98,70 @@ class MainController extends Controller {
       id;
     const result = await this.app.mysql.query(sql);
     this.ctx.body = { data: result };
+  }
+
+  //获取节点列表
+  async getNodeList() {
+    let sql =
+      "select node.id as id, " +
+      "node.name as name, " +
+      "node.type as type " +
+      "from node";
+    const nodeList = await this.app.mysql.query(sql);
+    this.ctx.body = {
+      data: nodeList,
+    };
+  }
+  //删除节点
+  async delNodeList() {
+    let id = this.ctx.params.id;
+    await this.app.mysql.delete("node", { id: id });
+    this.ctx.body = { data: "删除成功" };
+  }
+  // 增加节点
+  async addNodeList() {
+    let tmpNode = this.ctx.request.body;
+    await this.app.mysql.insert("node", tmpNode);
+    this.ctx.body = { data: "添加成功" };
+  }
+  //修改节点
+  async updateNodeList() {
+    let tmpNode = this.ctx.request.body;
+    console.log(tmpNode);
+    await this.app.mysql.update("node", tmpNode);
+    this.ctx.body = { data: "修改成功" };
+  }
+
+  // 获取关系列表
+  async getLinkList() {
+    let sql =
+      "select link.source as source, " +
+      "link.id as id, " +
+      "link.target as target,  " +
+      "link.rela as rela " +
+      "from link";
+    const linkList = await this.app.mysql.query(sql);
+    this.ctx.body = {
+      data: linkList,
+    };
+  }
+  // 删除关系
+  async delLinkList() {
+    let id = this.ctx.params.id;
+    await this.app.mysql.delete("link", { id: id });
+    this.ctx.body = { data: "删除成功" };
+  }
+  //增加关系
+  async addLinkList() {
+    let tmpLink = this.ctx.request.body;
+    await this.app.mysql.insert("link", tmpLink);
+    this.ctx.body = { data: "添加成功" };
+  }
+  //修改节点
+  async updateLinkList() {
+    let tmpLink = this.ctx.request.body;
+    await this.app.mysql.update("link", tmpLink);
+    this.ctx.body = { data: "修改成功" };
   }
 }
 
